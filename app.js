@@ -59,10 +59,10 @@ function openPerson(id, pushHash=true) {
       <div class="detail-kicker">${p.type === 'npc' ? '旅途人物档案' : '首领档案'}</div>
       <h2 id="detailTitle">${escapeHtml(p.zh)}</h2>
       <div class="detail-en">${escapeHtml(p.name)}</div>
+      <div class="section-label">人物故事</div>
       <div class="detail-story">${escapeHtml(p.story)}</div>
-      ${p.quote ? `<div class="quote">“${escapeHtml(p.quote)}”</div>` : ''}
       <div class="detail-meta"><div><small>身份</small><span>${escapeHtml(p.role)}</span></div><div><small>踪迹</small><span>${escapeHtml(p.location)}</span></div></div>
-      ${p.drops?.length ? `<div class="drops"><b>战利品</b> · ${p.drops.map(escapeHtml).join(' / ')}</div>` : ''}
+      ${p.type === 'boss' ? `<section class="loot-section"><div class="loot-head"><b>击败掉落</b><span>BOSS REWARDS</span></div><div class="loot-grid">${(p.drops?.length ? p.drops : ['暂无可靠掉落记录']).map(x=>`<span class="loot-item">${escapeHtml(x)}</span>`).join('')}</div></section>` : ''}
     </div>
   </div>
   <div class="relation-section"><div class="relation-title">命运交汇 · 关联人物</div><div class="relations">${related.length ? related.map(r => `<button class="relation" data-related="${r.id}">${escapeHtml(r.zh)} · ${escapeHtml(r.name)}</button>`).join('') : '<span class="detail-en">暂无明确关联记录</span>'}</div></div>`;
@@ -94,6 +94,8 @@ $('#sortSelect').addEventListener('change', e => {sort=e.target.value;render();}
 loadMore.addEventListener('click', () => {limit += 32;render();});
 $('#randomBtn').addEventListener('click', () => openPerson(people[Math.floor(Math.random()*people.length)].id));
 $('#totalCount').textContent=people.length;
+$('#npcCount').textContent=people.filter(p=>p.type==='npc').length;
+$('#bossCount').textContent=people.filter(p=>p.type==='boss').length;
 render();
 const deepLink=new URLSearchParams(location.hash.replace(/^#/, '')).get('person');
 if(deepLink) openPerson(deepLink,false);
