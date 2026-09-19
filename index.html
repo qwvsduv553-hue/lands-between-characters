@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="艾尔登法环人物图鉴：搜索 NPC 与 Boss，阅读故事，探索人物关系。">
+  <title>交界地人物志 · 艾尔登法环图鉴</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://eldenring.fanapis.com">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="返回人物图鉴顶部">
+      <span class="brand-mark" aria-hidden="true"><i></i></span>
+      <span><b>交界地人物志</b><small>ELDEN RING ARCHIVE</small></span>
+    </a>
+    <div class="top-meta"><span id="totalCount">158</span> 位人物 <button id="randomBtn" type="button">随机邂逅</button></div>
+  </header>
+
+  <main id="top">
+    <section class="intro" aria-labelledby="pageTitle">
+      <div class="eyebrow"><span></span> 褪色者的无剧透边界之外</div>
+      <h1 id="pageTitle">所有命运，<em>皆有回响。</em></h1>
+      <p>检索交界地的人物与强敌，循着故事和关系，重新拼合破碎的历史。</p>
+    </section>
+
+    <section class="explorer" aria-label="人物检索">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+        <input id="searchInput" type="search" placeholder="搜索中文名、英文名、地点或关键词…" autocomplete="off" aria-label="搜索人物">
+        <kbd>/</kbd>
+      </div>
+      <div class="controls">
+        <div class="tabs" role="tablist" aria-label="人物类别">
+          <button class="active" data-filter="all" role="tab" aria-selected="true">全部</button>
+          <button data-filter="npc" role="tab" aria-selected="false">旅途人物</button>
+          <button data-filter="boss" role="tab" aria-selected="false">首领</button>
+        </div>
+        <label class="sort-label">排序
+          <select id="sortSelect">
+            <option value="featured">典藏顺序</option>
+            <option value="az">名称 A–Z</option>
+            <option value="region">地域</option>
+          </select>
+        </label>
+      </div>
+      <div class="result-line" aria-live="polite"><span id="resultCount">载入中…</span><span class="spoiler">含人物故事剧透</span></div>
+      <div id="grid" class="grid" aria-live="polite"></div>
+      <div id="empty" class="empty" hidden><span>✦</span><h2>没有找到这位人物</h2><p>试试英文名、地点，或缩短关键词。</p></div>
+      <button id="loadMore" class="load-more" type="button" hidden>继续展开 <span></span></button>
+    </section>
+  </main>
+
+  <footer>
+    <span>愿赐福指引你的道路。</span>
+    <span>资料与图像来自 <a href="https://eldenring.fanapis.com/" target="_blank" rel="noreferrer">Elden Ring Fan API</a> · 非官方爱好者作品</span>
+  </footer>
+
+  <dialog id="detailDialog" aria-labelledby="detailTitle">
+    <button class="close" type="button" aria-label="关闭详情">×</button>
+    <div id="detail"></div>
+  </dialog>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
